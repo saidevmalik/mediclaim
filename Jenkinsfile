@@ -68,28 +68,28 @@ pipeline {
 	     //sh 'export JENKINS_NODE_COOKIE=dontkillme ;nohup java -jar $WORKSPACE/target/*.jar &'
 //}
 //}
-		stage ('UAT Approve')  {
-	steps{
-            echo "Taking approval from Uat Manager"     
-            timeout(time: 7, unit: 'DAYS') {
-            input message: 'Do you want to deploy?', submitter: 'user1'
-            }
-     }
-		}
-		stage('Deploye-UAT'){
-	   steps{
-		sshagent(['tomcat']) {
+		//stage ('UAT Approve')  {
+	//steps{
+           // echo "Taking approval from Uat Manager"     
+            //timeout(time: 7, unit: 'DAYS') {
+            //input message: 'Do you want to deploy?', submitter: 'user1'
+           // }
+    // }
+		//}
+		//stage('Deploye-UAT'){
+	   //steps{
+		//sshagent(['tomcat']) {
 	        //deploy adapters: [tomcat9(credentialsId: 'tomcat-deploy', path: '', url: 'http://52.66.195.248:8080/')], contextPath: 'mediclaim', war: '**/*.war'
-		 sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@52.66.195.248:/opt/tomcat/webapps/'
-		}
-	   }
-		}
-		stage('Deploy-Dev'){
-	   steps{
-		   sshagent(['Ansible']) {
-	       sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@65.0.101.237:/opt/playbooks/'
-		}
-	   }
-		}
+		 //sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@52.66.195.248:/opt/tomcat/webapps/'
+		//}
+	   //}
+		//}
+		//stage('Deploy-Dev'){
+	   //steps{
+		//   sshagent(['Ansible']) {
+	       //sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@65.0.101.237:/opt/playbooks/'
+		//}
+	  // }
+	//	}
 }
 }
