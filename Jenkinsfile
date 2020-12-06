@@ -75,6 +75,14 @@ pipeline {
 	        sh "docker push digambar1234/mediclaim_project4"
 }
 }
+		stage("Deploy To Kuberates Cluster"){
+			Steps{
+                   kubernetesDeploy(
+                   configs: 'kubernetes.yml', 
+                   kubeconfigId: 'KUBERNETES_CLUSTER_CONFIG',
+                   enableConfigSubstitution: true
+        )
+     }
 		//stage ('Release') {
 	     //steps {
 	     //sh 'export JENKINS_NODE_COOKIE=dontkillme ;nohup java -jar $WORKSPACE/target/*.jar &'
