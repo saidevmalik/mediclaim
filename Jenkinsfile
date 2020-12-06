@@ -63,7 +63,7 @@ pipeline {
 	     sh 'mvn clean deploy'
 }
 }
-				stage('Build Docker Image'){
+		stage('Build Docker Image'){
 		steps{
                sh 'docker build -t mediclaimproject .'
     }
@@ -71,8 +71,8 @@ pipeline {
 		stage('docker push'){
 			steps{
 		sh "docker login -u digambar1234 -p hallo@1234"
-	    sh "docker image tag mediclaimproject digambar1234/mediclaim_project3"
-	        sh "docker push digambar1234/mediclaim_project3"
+	    sh "docker image tag mediclaimproject digambar1234/mediclaim_project4"
+	        sh "docker push digambar1234/mediclaim_project4"
 }
 }
 		//stage ('Release') {
