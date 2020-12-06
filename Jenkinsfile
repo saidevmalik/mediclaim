@@ -78,7 +78,7 @@ pipeline {
 	       stage("Deploy To Kuberates Cluster"){
 	       steps{
                kubernetesDeploy(
-               configs: '', 
+               configs: 'kubernete.yml', 
                kubeconfigId: 'KUBERNETES_CLUSTER_CONFIG',
               enableConfigSubstitution: true
         )
