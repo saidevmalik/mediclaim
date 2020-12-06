@@ -47,12 +47,12 @@ pipeline {
 	           ])
 	          }
 	      }	
-			stage('unit-tests') {
-	            steps {
-	               sh 'mvn test -Pcoverage'
-	               stash includes: 'src/**, pom.xml, target/**', name: 'unit'
-	}
-	}
+			//stage('unit-tests') {
+	            //steps {
+	              // sh 'mvn test -Pcoverage'
+	               //stash includes: 'src/**, pom.xml, target/**', name: 'unit'
+	//}
+	//}
 			stage("email"){
 	            steps{
 	            mail bcc: '', body: 'Build is sucessful', cc: '', from: '', replyTo: '', subject: 'Build', to: 'saidevmalik123@gmail.com'
