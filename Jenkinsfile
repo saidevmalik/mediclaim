@@ -37,16 +37,16 @@ pipeline {
 	
 	            }
 	        }
-		//	stage('Publish Test Coverage Report') {
-	        //  steps {
-	          //   step([$class: 'JacocoPublisher', 
-	            // execPattern: '**/build/jacoco/*.exec',
-	             //classPattern: '**/build/classes',
-	             //sourcePattern: 'src/main/java',
-	             //exclusionPattern: 'src/test*'
-	           //])
-	          //}
-	      //}	
+        	stage('Publish Test Coverage Report') {
+	          steps {
+	             step([$class: 'JacocoPublisher', 
+	             execPattern: '**/build/jacoco/*.exec',
+	             classPattern: '**/build/classes',
+	             sourcePattern: 'src/main/java',
+	             exclusionPattern: 'src/test*'
+	           ])
+	          }
+	      }	
 			stage('unit-tests') {
 	            steps {
 	               sh 'mvn test -Pcoverage'
@@ -63,27 +63,27 @@ pipeline {
 		     //sh 'mvn clean deploy'
 	//}
 	//}
-			//stage('Build Docker Image'){
-			//steps{
-	               //sh 'docker build -t mediclaimproject .'
-	    //}
-	//}	
-			//stage('docker push'){
-			//	steps{
-			//sh "docker login -u digambar1234 -p hallo@1234"
-		    //sh "docker image tag mediclaimproject digambar1234/mediclaim_project3"
-		      //  sh "docker push digambar1234/mediclaim_project3"
-	//}
-	//}
-	  //     stage("Deploy To Kuberates Cluster"){
-	    //   steps{
-              // kubernetesDeploy(
-               //configs: 'kubernete.yml', 
-               //kubeconfigId: 'KUBERNETES_CLUSTER_CONFIG',
-              //enableConfigSubstitution: true
-       // )
-   // }
-   // }
+			stage('Build Docker Image'){
+			steps{
+	               sh 'docker build -t mediclaimproject .'
+	    }
+	}	
+			stage('docker push'){
+			steps{
+			sh "docker login -u digambar1234 -p hallo@1234"
+		        sh "docker image tag mediclaimproject digambar1234/mediclaim_project3"
+		        sh "docker push digambar1234/mediclaim_project3"
+	}
+	}
+	       stage("Deploy To Kuberates Cluster"){
+	      steps{
+               kubernetesDeploy(
+               configs: 'kubernete.yml', 
+               kubeconfigId: 'KUBERNETES_CLUSTER_CONFIG',
+              enableConfigSubstitution: true
+        )
+    }
+    }
 		//stage ('Release') {
 		     //steps {
 		     //sh 'export JENKINS_NODE_COOKIE=dontkillme ;nohup java -jar $WORKSPACE/target/*.jar &'
