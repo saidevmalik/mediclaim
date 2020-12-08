@@ -11,8 +11,10 @@ pipeline {
 		}
 		stage('Build') {
 		steps {
-		sh '/opt/maven/bin/mvn clean install'
+			withSonarQubeEnv('sonar3') {
+				sh '/opt/maven/bin/mvn clean verify sonar:sonar'
+			}
 		}
-	}	
+	}
 		}
 }
